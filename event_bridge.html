@@ -1,12 +1,9 @@
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Torque - Slide Plain</title>
+    <title>Torque - BRIDGE BUILDING</title>
     <meta name="keywords" content="torque, torquejntuk, torquejntuk.in, Torque Jntuk">
     <meta name="description" content="Event website-subpage">
     <meta name="author" content="Website Team, torquejntuk">
@@ -273,57 +270,64 @@
             <li><a href="torquejntuk.in">Home</a></li>
         </ul>
     </nav>
+<div class="main-wrapper">
+    <div class="content-container">
+        <div class="info-box full-width">
+            <h2>Bridge Battleground</h2>
+            <p>An Ultimate Bridge-Building Challenge – Where Engineering Meets Innovation!</p>
+        </div>
 
-    <div class="main-wrapper">
-        <div class="content-container">
-            <div class="info-box full-width">
-                <h2>Slide Plain</h2>
-                <p>An Innovation Presentation Challenge – Where Ideas Take Flight!</p>
-            </div>
+        <div class="image-container">
+            <img src="https://console.kr-asia.com/wp-content/uploads/2024/07/Tesla-Optimus-Gen2.jpg" alt="Bridge Battleground Image">
+        </div>
 
-            <div class="image-container">
-                <img src="https://console.kr-asia.com/wp-content/uploads/2024/07/Tesla-Optimus-Gen2.jpg" alt="Project Expo Image">
-            </div>
+        <div class="info-box full-width">
+            <h3>Welcome to Bridge Battleground</h3>
+            <p>Are you ready to put your engineering skills to the test and build a structure that stands strong against the forces of nature? Bridge Battleground is an exciting challenge where participants must design and construct a sturdy bridge using limited materials while demonstrating their knowledge of structural mechanics and load distribution. This event is a mix of creativity, technical expertise, and hands-on problem-solving.</p>
+        </div>
 
-            <div class="info-box full-width">
-                <h3>Welcome to Project Expo</h3>
-                <p>A Celebration of Creativity, Innovation, and Groundbreaking Ideas! Join us on a journey to unleash the power of imagination and innovation. This event is the ultimate platform for brilliant minds to showcase their cutting-edge projects, prototypes, presentations, inventions, and solutions that have the potential to transform the future.</p>
-            </div>
+        <div class="info-box">
+            <h3>Event Highlights</h3>
+            <p><strong>Materials Provided:</strong> Participants will be given a set of materials (e.g., popsicle sticks, straws, glue, threads) and must construct a strong and stable bridge within the given time.</p>
+            <p><strong>Time Limit:</strong> Participants will have 2 hours to complete their bridge.</p>
+            <p><strong>Testing Criteria:</strong> The bridge will be tested for strength, load-bearing capacity, and efficiency.</p>
+            <p><strong>Prizes:</strong> Exciting prizes await those who can combine smart engineering with innovative thinking.</p>
+        </div>
 
-            <div class="info-box">
-                <h3>Event Format</h3>
-                <p><strong>Project Exhibition:</strong> Teams (of maximum 4) will showcase their projects, prototypes, and posters during the event.</p>
-                <p><strong>Judging and Evaluation:</strong> Projects will be evaluated based on innovation, creativity, feasibility, scalability, and impact.</p>
-            </div>
+        <div class="info-box">
+            <h3>Judging Criteria</h3>
+            <p><strong>Strength:</strong> The bridge must withstand the maximum load without collapsing.</p>
+            <p><strong>Efficiency:</strong> The bridge should use materials optimally with minimal waste.</p>
+            <p><strong>Design:</strong> Creativity and innovation in the bridge's design will be evaluated.</p>
+            <p><strong>Adherence to Rules:</strong> Compliance with the provided guidelines and time limit.</p>
+        </div>
 
-            <div class="coordinator-box">
-                <h3>Coordinators</h3>
-                <div class="coordinator-info">
-                    <div>
-                        <p><strong>M. Sai Mani Kumar</strong></p>
-                        <p>Phone: +91 7842912707</p>
-                    </div>
-                    <div>
-                        <p><strong>N. Tanuja Sri</strong></p>
-                        <p>Phone: +91 9908438481</p>
-                    </div>
+        <div class="coordinator-box">
+            <h3>Coordinators</h3>
+            <div class="coordinator-info">
+                <div>
+                    <p><strong>D.Sri Ram (</strong></p>
+                    <p>Phone: +91 9701244959 </p>
+                </div>
+                <div>
+                    <p><strong>K.Gayatri</strong></p>
+
                 </div>
             </div>
         </div>
     </div>
-
-    <footer class="footer">
-        <p>&copy; 2025 Torque JNTUK. All rights reserved.</p>
-        <div class="social-links">
-            <a href="#" class="social-icon facebook"><i class="fa fa-facebook"></i></a>
-            <a href="#" class="social-icon twitter"><i class="fa fa-twitter"></i></a>
-            <a href="#" class="social-icon instagram"><i class="fa fa-instagram"></i></a>
-            <a href="#" class="social-icon linkedin"><i class="fa fa-linkedin"></i></a>
-        </div>
-    </footer>
-
+</div>
+<footer class="footer">
+    <p>&copy; 2025 Torque JNTUK. All rights reserved.</p>
+    <div class="social-links">
+        <a href="#" class="social-icon facebook"><i class="fa fa-facebook"></i></a>
+        <a href="#" class="social-icon twitter"><i class="fa fa-twitter"></i></a>
+        <a href="#" class="social-icon instagram"><i class="fa fa-instagram"></i></a>
+        <a href="#" class="social-icon linkedin"><i class="fa fa-linkedin"></i></a>
+    </div>
+</footer>
     <script>
-        
+        // Star field animation code (same as before)
         var Star = function(x, y, maxSpeed) {
             this.x = x;
             this.y = y;
@@ -440,7 +444,7 @@
             this._initScene(this.numStars);
         };
 
-      
+        // RequestAnimationFrame polyfill
         (function() {
             var lastTime = 0;
             var vendors = ['ms', 'moz', 'webkit', 'o'];
@@ -469,18 +473,18 @@
             }
         }());
 
-  
+        // Initialize the starfield
         document.addEventListener('DOMContentLoaded', function() {
             var starField = new StarField('background_container').render(333, 5);
 
-          
+            // Handle resize events
             window.addEventListener('resize', function() {
                 if (starField) {
                     starField._adjustCanvasSize();
                 }
             });
 
-    
+            // Handle visibility change to pause/resume animation
             document.addEventListener('visibilitychange', function() {
                 if (document.hidden) {
                     window.cancelAnimationFrame(starField._renderFrame);
@@ -491,6 +495,7 @@
                 }
             });
 
+            // Add smooth scrolling for better mobile experience
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
