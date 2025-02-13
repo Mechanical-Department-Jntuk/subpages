@@ -1,12 +1,9 @@
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Torque - Slide Plain</title>
+    <title>Torque - Project Expo</title>
     <meta name="keywords" content="torque, torquejntuk, torquejntuk.in, Torque Jntuk">
     <meta name="description" content="Event website-subpage">
     <meta name="author" content="Website Team, torquejntuk">
@@ -274,56 +271,65 @@
         </ul>
     </nav>
 
-    <div class="main-wrapper">
-        <div class="content-container">
-            <div class="info-box full-width">
-                <h2>Slide Plain</h2>
-                <p>An Innovation Presentation Challenge – Where Ideas Take Flight!</p>
-            </div>
 
-            <div class="image-container">
-                <img src="https://console.kr-asia.com/wp-content/uploads/2024/07/Tesla-Optimus-Gen2.jpg" alt="Project Expo Image">
-            </div>
+    
 
-            <div class="info-box full-width">
-                <h3>Welcome to Project Expo</h3>
-                <p>A Celebration of Creativity, Innovation, and Groundbreaking Ideas! Join us on a journey to unleash the power of imagination and innovation. This event is the ultimate platform for brilliant minds to showcase their cutting-edge projects, prototypes, presentations, inventions, and solutions that have the potential to transform the future.</p>
-            </div>
+<div class="main-wrapper">
+    <div class="content-container">
+        <div class="info-box full-width">
+            <h2>Chess Monarch</h2>
+            <p>Where Strategy Meets Supremacy</p>
+        </div>
 
-            <div class="info-box">
-                <h3>Event Format</h3>
-                <p><strong>Project Exhibition:</strong> Teams (of maximum 4) will showcase their projects, prototypes, and posters during the event.</p>
-                <p><strong>Judging and Evaluation:</strong> Projects will be evaluated based on innovation, creativity, feasibility, scalability, and impact.</p>
-            </div>
+        <div class="image-container">
+            <img src="https://console.kr-asia.com/wp-content/uploads/2024/07/Tesla-Optimus-Gen2.jpg" alt="Chess Monarch Image">
+        </div>
 
-            <div class="coordinator-box">
-                <h3>Coordinators</h3>
-                <div class="coordinator-info">
-                    <div>
-                        <p><strong>M. Sai Mani Kumar</strong></p>
-                        <p>Phone: +91 7842912707</p>
-                    </div>
-                    <div>
-                        <p><strong>N. Tanuja Sri</strong></p>
-                        <p>Phone: +91 9908438481</p>
-                    </div>
+        <div class="info-box full-width">
+            <h3>Welcome to Chess Monarch</h3>
+            <p>"Welcome to Chess Monarch: A Celebration of Intellectual Prowess, Strategic Brilliance, and Mind-Sport Excellence!" Join us on a journey to unleash the power of chess and crown the ultimate champion. This event is the ultimate platform for chess enthusiasts to showcase their skills, strategies, and mental agility in a battle of wits that will leave only one victorious.</p>
+        </div>
+
+        <div class="info-box">
+            <h3>Event Format</h3>
+            <p><strong>Online Chess Tournament:</strong> Players will compete in a Swiss-style tournament, with 7 rounds of intense competition, on the Lichess platform.</p>
+            <p><strong>Time Control:</strong> Each player will have 15 minutes with NO increment to make their moves, requiring a perfect blend of strategy, tactics, and time management.</p>
+            <p><strong>Judging and Evaluation:</strong> Players will be ranked based on their performance, with the top-ranked player being crowned the Chess Monarch.</p>
+        </div>
+
+        <div class="info-box">
+            <h3>Prizes and Recognition</h3>
+            <p><strong>Winner:</strong> The winner of the tournament will be crowned the Chess Monarch and will receive a prize.</p>
+            <p><strong>Top 3 Players:</strong> The top 3 players will receive prizes and certificates of recognition.</p>
+            <p><strong>All Participants:</strong> All participants will receive a certificate of participation and a chance to improve their chess skills.</p>
+        </div>
+
+        <div class="coordinator-box">
+            <h3>Coordinators</h3>
+            <div class="coordinator-info">
+                <div>
+                    <p><strong>M. Sai Mani Kumar</strong></p>
+                    <p>Phone: +91 7842912707</p>
+                </div>
+                <div>
+                    <p><strong>N. Tanuja Sri</strong></p>
+                    <p>Phone: +91 9908438481</p>
                 </div>
             </div>
         </div>
     </div>
-
-    <footer class="footer">
-        <p>&copy; 2025 Torque JNTUK. All rights reserved.</p>
-        <div class="social-links">
-            <a href="#" class="social-icon facebook"><i class="fa fa-facebook"></i></a>
-            <a href="#" class="social-icon twitter"><i class="fa fa-twitter"></i></a>
-            <a href="#" class="social-icon instagram"><i class="fa fa-instagram"></i></a>
-            <a href="#" class="social-icon linkedin"><i class="fa fa-linkedin"></i></a>
-        </div>
-    </footer>
-
+</div>
+<footer class="footer">
+    <p>&copy; 2025 Torque JNTUK. All rights reserved.</p>
+    <div class="social-links">
+        <a href="#" class="social-icon facebook"><i class="fa fa-facebook"></i></a>
+        <a href="#" class="social-icon twitter"><i class="fa fa-twitter"></i></a>
+        <a href="#" class="social-icon instagram"><i class="fa fa-instagram"></i></a>
+        <a href="#" class="social-icon linkedin"><i class="fa fa-linkedin"></i></a>
+    </div>
+</footer>
     <script>
-        
+        // Star field animation code (same as before)
         var Star = function(x, y, maxSpeed) {
             this.x = x;
             this.y = y;
@@ -440,7 +446,7 @@
             this._initScene(this.numStars);
         };
 
-      
+        // RequestAnimationFrame polyfill
         (function() {
             var lastTime = 0;
             var vendors = ['ms', 'moz', 'webkit', 'o'];
@@ -469,18 +475,18 @@
             }
         }());
 
-  
+        // Initialize the starfield
         document.addEventListener('DOMContentLoaded', function() {
             var starField = new StarField('background_container').render(333, 5);
 
-          
+            // Handle resize events
             window.addEventListener('resize', function() {
                 if (starField) {
                     starField._adjustCanvasSize();
                 }
             });
 
-    
+            // Handle visibility change to pause/resume animation
             document.addEventListener('visibilitychange', function() {
                 if (document.hidden) {
                     window.cancelAnimationFrame(starField._renderFrame);
@@ -491,6 +497,7 @@
                 }
             });
 
+            // Add smooth scrolling for better mobile experience
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
