@@ -1,629 +1,505 @@
-<html>
-  <head>
-<meta charset="utf-8">
-  <title>Torque</title>
-  <meta name="keywords" content="torque, torquejntuk, torquejntuk.in, Torque Jntuk">
-  <meta name="description" content="Event website-subpage">
-  <meta name="author" content="Website Team, torquejntuk">
-  <link rel="icon" href="images/torque-logo.png">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Torque - Project Expo</title>
+    <meta name="keywords" content="torque, torquejntuk, torquejntuk.in, Torque Jntuk">
+    <meta name="description" content="Event website-subpage">
+    <meta name="author" content="Website Team, torquejntuk">
+    <link rel="icon" href="images/torque-logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        #background_container {
+            position: fixed;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+            background: #000;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -2;
+            user-select: none;
+        }
+
+        .main-wrapper {
+            min-height: 100vh;
+            padding: 80px 20px 100px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            padding: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .content-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .info-box {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            animation: slideIn 1s ease-out;
+        }
+
+        .info-box.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .info-box h2 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            color: #00ffff;
+        }
+
+        .info-box h3 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            color: #00ffff;
+        }
+
+        .info-box p {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .image-container {
+            grid-column: 1 / -1;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .coordinator-box {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            animation: slideIn 1s ease-out;
+        }
+
+        .coordinator-box h3 {
+            color: #00ffff;
+            margin-bottom: 20px;
+        }
+
+        .coordinator-info {
+            display: grid;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .coordinator-info {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .glass-navbar {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 400px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-radius: 30px;
+            padding: 15px 30px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .glass-navbar ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .glass-navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 20px;
+            border-radius: 15px;
+        }
+
+        .glass-navbar a:hover {
+            background: rgba(0, 255, 255, 0.2);
+            color: #00ffff;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .social-icon {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px);
+            background: rgba(0, 255, 255, 0.3);
+        }
+
+        .facebook:hover { background: #3b5998; }
+        .twitter:hover { background: #00acee; }
+        .instagram:hover { background: #e4405f; }
+        .linkedin:hover { background: #0e76a8; }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .main-wrapper {
+                padding: 60px 10px 80px;
+            }
+
+            .content-container {
+                padding: 10px;
+                gap: 20px;
+            }
+
+            .info-box {
+                padding: 20px;
+            }
+
+            .info-box h2 {
+                font-size: 2em;
+            }
+
+            .info-box h3 {
+                font-size: 1.5em;
+            }
+
+            .coordinator-box {
+                padding: 20px;
+            }
+
+            .social-links {
+                gap: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
-</head>
-  <div id="background_container">
-      <canvas id="background"></canvas>
-      <div class="content-container">
-        <div class="info-box">
-          <h2>Slide Plain</h2>
-          <p>An Innovation Presentation Challenge – Where Ideas Take Flight! </p>
-          <p></p>
-        </div>
-        <div class="image-container">
-          <img src="https://console.kr-asia.com/wp-content/uploads/2024/07/Tesla-Optimus-Gen2.jpg">
-        </div>
-      </div>
-      <nav class="glass-navbar">
-        <ul>
-          <li><a href="torquejntuk.in">Home</a></li>
-        </ul>
-      </nav>
+    <div id="background_container">
+        <canvas id="background"></canvas>
+    </div>
 
+    <nav class="glass-navbar">
+        <ul>
+            <li><a href="torquejntuk.in">Home</a></li>
+        </ul>
+    </nav>
+
+    <div class="main-wrapper">
+        <div class="content-container">
+            <div class="info-box full-width">
+                <h2>Slide Plain</h2>
+                <p>An Innovation Presentation Challenge – Where Ideas Take Flight!</p>
+            </div>
+
+            <div class="image-container">
+                <img src="https://console.kr-asia.com/wp-content/uploads/2024/07/Tesla-Optimus-Gen2.jpg" alt="Project Expo Image">
+            </div>
+
+            <div class="info-box full-width">
+                <h3>Welcome to Project Expo</h3>
+                <p>A Celebration of Creativity, Innovation, and Groundbreaking Ideas! Join us on a journey to unleash the power of imagination and innovation. This event is the ultimate platform for brilliant minds to showcase their cutting-edge projects, prototypes, presentations, inventions, and solutions that have the potential to transform the future.</p>
+            </div>
+
+            <div class="info-box">
+                <h3>Event Format</h3>
+                <p><strong>Project Exhibition:</strong> Teams (of maximum 4) will showcase their projects, prototypes, and posters during the event.</p>
+                <p><strong>Judging and Evaluation:</strong> Projects will be evaluated based on innovation, creativity, feasibility, scalability, and impact.</p>
+            </div>
+
+            <div class="coordinator-box">
+                <h3>Coordinators</h3>
+                <div class="coordinator-info">
+                    <div>
+                        <p><strong>M. Sai Mani Kumar</strong></p>
+                        <p>Phone: +91 7842912707</p>
+                    </div>
+                    <div>
+                        <p><strong>N. Tanuja Sri</strong></p>
+                        <p>Phone: +91 9908438481</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 Torque JNTUK. All rights reserved.</p>
+        <div class="social-links">
+            <a href="#" class="social-icon facebook"><i class="fa fa-facebook"></i></a>
+            <a href="#" class="social-icon twitter"><i class="fa fa-twitter"></i></a>
+            <a href="#" class="social-icon instagram"><i class="fa fa-instagram"></i></a>
+            <a href="#" class="social-icon linkedin"><i class="fa fa-linkedin"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        
+        var Star = function(x, y, maxSpeed) {
+            this.x = x;
+            this.y = y;
+            this.slope = y / x;
+            this.opacity = 0;
+            this.speed = Math.max(Math.random() * maxSpeed, 1);
+        };
+
+        Star.prototype.distanceTo = function(originX, originY) {
+            return Math.sqrt(Math.pow(originX - this.x, 2) + Math.pow(originY - this.y, 2));
+        };
+
+        Star.prototype.resetPosition = function(x, y, maxSpeed) {
+            Star.apply(this, arguments);
+            return this;
+        };
+
+        var BigBang = {
+            getRandomStar: function(minX, minY, maxX, maxY, maxSpeed) {
+                var coords = BigBang.getRandomPosition(minX, minY, maxX, maxY);
+                return new Star(coords.x, coords.y, maxSpeed);
+            },
+
+            getRandomPosition: function(minX, minY, maxX, maxY) {
+                return {
+                    x: Math.floor((Math.random() * maxX) + minX),
+                    y: Math.floor((Math.random() * maxY) + minY)
+                };
+            }
+        };
+
+        var StarField = function(containerId) {
+            this.container = document.getElementById(containerId);
+            this.canvasElem = this.container.getElementsByTagName('canvas')[0];
+            this.canvas = this.canvasElem.getContext('2d');
+            this.width = this.container.offsetWidth;
+            this.height = this.container.offsetHeight;
+            this.starField = [];
+        };
+
+        StarField.prototype._updateStarField = function() {
+            var i, star, randomLoc, increment;
+            for (i = 0; i < this.numStars; i++) {
+                star = this.starField[i];
+                increment = Math.min(star.speed, Math.abs(star.speed / star.slope));
+                star.x += (star.x > 0) ? increment : -increment;
+                star.y = star.slope * star.x;
+                star.opacity += star.speed / 100;
+                if ((Math.abs(star.x) > this.width / 2) || (Math.abs(star.y) > this.height / 2)) {
+                    randomLoc = BigBang.getRandomPosition(-this.width / 10, -this.height / 10, this.width / 5, this.height / 5);
+                    star.resetPosition(randomLoc.x, randomLoc.y, this.maxStarSpeed);
+                }
+            }
+        };
+
+        StarField.prototype._renderStarField = function() {
+            this.canvas.fillStyle = "rgba(0, 0, 0, .5)";
+            this.canvas.fillRect(0, 0, this.width, this.height);
+            for (var i = 0; i < this.numStars; i++) {
+                var star = this.starField[i];
+                this.canvas.fillStyle = "rgba(255, 255, 255, " + star.opacity + ")";
+                this.canvas.fillRect(star.x + this.width / 2, star.y + this.height / 2, 2, 2);
+            }
+        };
+
+        StarField.prototype._renderFrame = function(elapsedTime) {
+            var timeSinceLastFrame = elapsedTime - (this.prevFrameTime || 0);
+            window.requestAnimationFrame(this._renderFrame.bind(this));
+            if (timeSinceLastFrame >= 30 || !this.prevFrameTime) {
+                this.prevFrameTime = elapsedTime;
+                this._updateStarField();
+                this._renderStarField();
+            }
+        };
+
+        StarField.prototype._adjustCanvasSize = function(width, height) {
+            this.width = this.canvasElem.width = width || this.container.offsetWidth;
+            this.height = this.canvasElem.height = height || this.container.offsetHeight;
+        };
+
+        StarField.prototype._watchCanvasSize = function(elapsedTime) {
+            var timeSinceLastCheck = elapsedTime - (this.prevCheckTime || 0);
+            window.requestAnimationFrame(this._watchCanvasSize.bind(this));
+            if (timeSinceLastCheck >= 333 || !this.prevCheckTime) {
+                this.prevCheckTime = elapsedTime;
+                var width = this.container.offsetWidth;
+                var height = this.container.offsetHeight;
+                if (this.oldWidth !== width || this.oldHeight !== height) {
+                    this.oldWidth = width;
+                    this.oldHeight = height;
+                    this._adjustCanvasSize(width, height);
+                }
+            }
+        };
+
+        StarField.prototype._initScene = function(numStars) {for (var i = 0; i < this.numStars; i++) {
+                this.starField.push(
+                    BigBang.getRandomStar(
+                        -this.width / 2,
+                        -this.height / 2,
+                        this.width,
+                        this.height,
+                        this.maxStarSpeed
+                    )
+                );
+            }
+            window.requestAnimationFrame(this._renderFrame.bind(this));
+            window.requestAnimationFrame(this._watchCanvasSize.bind(this));
+        };
+
+        StarField.prototype.render = function(numStars, maxStarSpeed) {
+            this.numStars = numStars || 100;
+            this.maxStarSpeed = maxStarSpeed || 3;
+            this._initScene(this.numStars);
+        };
+
+      
+        (function() {
+            var lastTime = 0;
+            var vendors = ['ms', 'moz', 'webkit', 'o'];
+            for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+                window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
+                window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame'] || 
+                                           window[vendors[x]+'CancelRequestAnimationFrame'];
+            }
+
+            if (!window.requestAnimationFrame) {
+                window.requestAnimationFrame = function(callback, element) {
+                    var currTime = new Date().getTime();
+                    var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+                    var id = window.setTimeout(function() { 
+                        callback(currTime + timeToCall); 
+                    }, timeToCall);
+                    lastTime = currTime + timeToCall;
+                    return id;
+                };
+            }
+
+            if (!window.cancelAnimationFrame) {
+                window.cancelAnimationFrame = function(id) {
+                    clearTimeout(id);
+                };
+            }
+        }());
 
   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<style>
-  #background_container {
-  position: fixed;
-    padding: 0px; margin: 0px;
-  overflow: hidden;
-  background: #000;
-  width: 100%;
-    height: 100%;
-    top:0px;
-    left:0px;
-    z-index: -2;
-        user-select:none;
-}
-.content-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 80%;
-  max-width: 1200px;
-}
-
-.info-box {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  padding: 30px;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-  color: white;
-  width: 50%;
-  animation: slideIn 1s ease-out;
-}
-
-.info-box h2 {
-  font-size: 2.5em;
-  margin-bottom: 15px;
-}
-
-.info-box p {
-  font-size: 1.1em;
-  line-height: 1.6;
-}
-
-.image-container {
-  width: 40%;
-}
-
-.image-container img {
-  width: 100%;
-  border-radius: 10px;
-  animation: fadeIn 1.5s ease-out;
-}
-/* Media query for mobile devices */
-@media screen and (max-width: 768px) {
-  .content-container {
-    flex-direction: column;
-    width: 90%;
-  }
-
-  .info-box {
-    width: 100%;
-    margin-bottom: 20px;
-  }
-
-  .image-container {
-    width: 100%;
-  }
-}
-
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateX(-50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-.glass-navbar {
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: auto;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  z-index: 1000;
-  border-radius: 30px;
-  padding: 10px 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.glass-navbar ul {
-  display: flex;
-  justify-content: center;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-.glass-navbar li {
-  margin: 0 15px;
-}
-
-.glass-navbar a {
-  color: white;
-  text-decoration: none;
-  font-size: 16px;
-  font-weight: 500;
-  transition: color 0.3s ease;
-}
-
-.glass-navbar a:hover {
-  color: #00ffff;
-}
-.social_icons {
-  margin-bottom: 20px;
-}
-
-.social-network {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  padding: 0;
-}
-
-.social-network li {
-  margin: 0 10px;
-}
-
-.social-network a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
-  transition: all 0.3s ease;
-}
-
-.social-network a:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: translateY(-3px);
-}
-
-.fa {
-  font-size: 20px;
-}
-
-#footer_info {
-  color: white;
-  font-size: 14px;
-}
-
-#footer_info a {
-  color: #00ffff;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-#footer_info a:hover {
-  color: #ff00ff;
-}
-/* Basic Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* Footer Styling */
-.footer {
-  background-color: #222;
-  color: #fff;
-  padding: 20px 0;
-  text-align: center;
-}
-
-.footer-content {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.footer p {
-  margin-bottom: 10px;
-  font-size: 14px;
-}
-
-.social-links {
-  margin-top: 10px;
-}
-
-.social-icon {
-  text-decoration: none;
-  font-size: 18px;
-  margin: 0 15px;
-  padding: 10px;
-  border-radius: 50%;
-  transition: all 0.3s ease;
-  color: #fff;
-  background-color: #444;
-}
-
-.social-icon:hover {
-  background-color: #1d72b8;
-}
-
-.facebook:hover {
-  background-color: #3b5998;
-}
-
-.twitter:hover {
-  background-color: #00acee;
-}
-
-.instagram:hover {
-  background-color: #e4405f;
-}
-
-.linkedin:hover {
-  background-color: #0e76a8;
-}
-
-
-</style>
-
-  <script>
-    /**
- * The stars in our starfield!
- * Stars coordinate system is relative to the CENTER of the canvas
- * @param  {number} x
- * @param  {number} y
- */
-var Star = function(x, y, maxSpeed) {
-    this.x = x;
-    this.y = y;
-    this.slope = y / x; // This only works because our origin is always (0,0)
-    this.opacity = 0;
-    this.speed = Math.max(Math.random() * maxSpeed, 1);
-};
-
-/**
- * Compute the distance of this star relative to any other point in space.
- *
- * @param  {int} originX
- * @param  {int} originY
- *
- * @return {float} The distance of this star to the given origin
- */
-Star.prototype.distanceTo = function(originX, originY) {
-    return Math.sqrt(Math.pow(originX - this.x, 2) + Math.pow(originY - this.y, 2));
-};
-
-/**
- * Reinitializes this star's attributes, without re-creating it
- *
- * @param  {number} x
- * @param  {number} y
- *
- * @return {Star} this star
- */
-Star.prototype.resetPosition = function(x, y, maxSpeed) {
-    Star.apply(this, arguments);
-    return this;
-};
-
-/**
- * The BigBang factory creates stars (Should be called StarFactory, but that is
- * a WAY LESS COOL NAME!
- * @type {Object}
- */
-var BigBang = {
-    /**
-     * Returns a random star within a region of the space.
-     *
-     * @param  {number} minX minimum X coordinate of the region
-     * @param  {number} minY minimum Y coordinate of the region
-     * @param  {number} maxX maximum X coordinate of the region
-     * @param  {number} maxY maximum Y coordinate of the region
-     *
-     * @return {Star} The random star
-     */
-    getRandomStar: function(minX, minY, maxX, maxY, maxSpeed) {
-        var coords = BigBang.getRandomPosition(minX, minY, maxX, maxY);
-        return new Star(coords.x, coords.y, maxSpeed);
-    },
-
-    /**
-     * Gets a random (x,y) position within a bounding box
-     *
-     *
-     * @param  {number} minX minimum X coordinate of the region
-     * @param  {number} minY minimum Y coordinate of the region
-     * @param  {number} maxX maximum X coordinate of the region
-     * @param  {number} maxY maximum Y coordinate of the region
-     *
-     * @return {Object} An object with random {x, y} positions
-     */
-    getRandomPosition: function(minX, minY, maxX, maxY) {
-        return {
-            x: Math.floor((Math.random() * maxX) + minX),
-            y: Math.floor((Math.random() * maxY) + minY)
-        };
-    }
-};
-
-/**
- * Constructor function of our starfield. This just prepares the DOM nodes where
- * the scene will be rendered.
- *
- * @param {string} canvasId The DOM Id of the <div> containing a <canvas> tag
- */
-var StarField = function(containerId) {
-    this.container = document.getElementById(containerId);
-    this.canvasElem = this.container.getElementsByTagName('canvas')[0];
-    this.canvas = this.canvasElem.getContext('2d');
-
-    this.width = this.container.offsetWidth;
-    this.height = this.container.offsetHeight;
-
-    this.starField = [];
-};
-
-/**
- * Updates the properties for every star for the next frame to be rendered
- */
-StarField.prototype._updateStarField = function() {
-    var i,
-        star,
-        randomLoc,
-        increment;
-
-    for (i = 0; i < this.numStars; i++) {
-        star = this.starField[i];
-
-        increment = Math.min(star.speed, Math.abs(star.speed / star.slope));
-        star.x += (star.x > 0) ? increment : -increment;
-        star.y = star.slope * star.x;
-
-        star.opacity += star.speed / 100;
-
-        // Recycle star obj if it goes out of the frame
-        if ((Math.abs(star.x) > this.width / 2) ||
-            (Math.abs(star.y) > this.height / 2)) {
-            //randomLoc = BigBang.getRandomPosition(
-            //    -this.width / 2, -this.height / 2,
-            //       this.width, this.height
-            //);
-            randomLoc = BigBang.getRandomPosition(
-                -this.width / 10, -this.height / 10,
-                   this.width / 5, this.height / 5
-            );
-            star.resetPosition(randomLoc.x, randomLoc.y, this.maxStarSpeed);
-        }
-    }
-};
-
-/**
- * Renders the whole starfield (background + stars)
- * This method could be made more efficient by just blipping each star,
- * and not redrawing the whole frame
- */
-StarField.prototype._renderStarField = function() {
-    var i,
-        star;
-    // Background
-    this.canvas.fillStyle = "rgba(0, 0, 0, .5)";
-    this.canvas.fillRect(0, 0, this.width, this.height);
-    // Stars
-    for (i = 0; i < this.numStars; i++) {
-        star = this.starField[i];
-        this.canvas.fillStyle = "rgba(255, 255, 255, " + star.opacity + ")";
-        this.canvas.fillRect(
-            star.x + this.width / 2,
-            star.y + this.height / 2,
-            2, 2);
-    }
-};
-
-/**
- * Function that handles the animation of each frame. Update the starfield
- * positions and re-render
- */
-StarField.prototype._renderFrame = function(elapsedTime) {
-    var timeSinceLastFrame = elapsedTime - (this.prevFrameTime || 0);
-
-    window.requestAnimationFrame(this._renderFrame.bind(this));
-
-    // Skip frames unless at least 30ms have passed since the last one
-    // (Cap to ~30fps)
-    if (timeSinceLastFrame >= 30 || !this.prevFrameTime) {
-        this.prevFrameTime = elapsedTime;
-        this._updateStarField();
-        this._renderStarField();
-    }
-};
-
-/**
- * Makes sure that the canvas size fits the size of its container
- */
-StarField.prototype._adjustCanvasSize = function(width, height) {
-    // Set the canvas size to match the container ID (and cache values)
-    this.width = this.canvasElem.width = width || this.container.offsetWidth;
-    this.height = this.canvasElem.height = height || this.container.offsetHeight;
-};
-
-/**
- * This listener compares the old container size with the new one, and caches
- * the new values.
- */
-StarField.prototype._watchCanvasSize = function(elapsedTime) {
-    var timeSinceLastCheck = elapsedTime - (this.prevCheckTime || 0),
-        width,
-        height;
-
-    window.requestAnimationFrame(this._watchCanvasSize.bind(this));
-
-    // Skip frames unless at least 333ms have passed since the last check
-    // (Cap to ~3fps)
-    if (timeSinceLastCheck >= 333 || !this.prevCheckTime) {
-        this.prevCheckTime = elapsedTime;
-        width = this.container.offsetWidth;
-        height = this.container.offsetHeight;
-        if (this.oldWidth !== width || this.oldHeight !== height) {
-            this.oldWidth = width;
-            this.oldHeight = height;
-            this._adjustCanvasSize(width, height);
-        }
-    }
-};
-
-/**
- * Initializes the scene by resizing the canvas to the appropiate value, and
- * sets up the main loop.
- * @param {int} numStars Number of stars in our starfield
- */
-StarField.prototype._initScene = function(numStars) {
-    var i;
-    for (i = 0; i < this.numStars; i++) {
-        this.starField.push(
-            BigBang.getRandomStar(-this.width / 2, -this.height / 2, this.width, this.height, this.maxStarSpeed)
-        );
-    }
-
-    // Intervals not stored because I don't plan to detach them later...
-    window.requestAnimationFrame(this._renderFrame.bind(this));
-    window.requestAnimationFrame(this._watchCanvasSize.bind(this));
-};
-
-/**
- * Kicks off everything!
- * @param {int} numStars The number of stars to render
- * @param {int} maxStarSpeed Maximum speed of the stars (pixels / frame)
- */
-StarField.prototype.render = function(numStars, maxStarSpeed) {
-    this.numStars = numStars || 100;
-    this.maxStarSpeed = maxStarSpeed || 3;
-
-    this._initScene(this.numStars);
-};
-
-/**
- * requestAnimationFrame shim layer with setTimeout fallback
- * @see http://paulirish.com/2011/requestanimationframe-for-smart-animating
- */
-(function() {
-    var lastTime = 0;
-    var vendors = ['ms', 'moz', 'webkit', 'o'];
-    for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
-        window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
-        window.cancelAnimationFrame =
-          window[vendors[x]+'CancelAnimationFrame'] || window[vendors[x]+'CancelRequestAnimationFrame'];
-    }
-
-    if (!window.requestAnimationFrame)
-        window.requestAnimationFrame = function(callback, element) {
-            var currTime = new Date().getTime();
-            var timeToCall = Math.max(0, 16 - (currTime - lastTime));
-            var id = window.setTimeout(function() { callback(currTime + timeToCall); },
-              timeToCall);
-            lastTime = currTime + timeToCall;
-            return id;
-        };
-
-    if (!window.cancelAnimationFrame)
-        window.cancelAnimationFrame = function(id) {
-            clearTimeout(id);
-        };
-}());
-
-// Kick off!
-var starField = new StarField('background_container').render(333, 5);
-
-  </script>
-
-</section>
-
-<footer class="footer">
-  <div class="footer-content">
-    <p>&copy; 2025 Your Company. All rights reserved.</p>
-    <div class="social-links">
-      <a href="https://www.facebook.com" target="_blank" class="social-icon facebook">Facebook</a>
-      <a href="https://www.twitter.com" target="_blank" class="social-icon twitter">Twitter</a>
-      <a href="https://www.instagram.com" target="_blank" class="social-icon instagram">Instagram</a>
-      <a href="https://www.linkedin.com" target="_blank" class="social-icon linkedin">LinkedIn</a>
-    </div>
-  </div>
-</footer>
-</body></html>
+        document.addEventListener('DOMContentLoaded', function() {
+            var starField = new StarField('background_container').render(333, 5);
+
+          
+            window.addEventListener('resize', function() {
+                if (starField) {
+                    starField._adjustCanvasSize();
+                }
+            });
+
+    
+            document.addEventListener('visibilitychange', function() {
+                if (document.hidden) {
+                    window.cancelAnimationFrame(starField._renderFrame);
+                    window.cancelAnimationFrame(starField._watchCanvasSize);
+                } else {
+                    window.requestAnimationFrame(starField._renderFrame.bind(starField));
+                    window.requestAnimationFrame(starField._watchCanvasSize.bind(starField));
+                }
+            });
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
