@@ -412,9 +412,9 @@
 <footer class="footer">
     <p>&copy; 2025 Torque JNTUK. All rights reserved.</p>
     <div class="social-links">
-        <a href="https://x.com/TORQUE_2K25?t=ILgS1XjD_ygM9mzeEA1mbQ&s=08" class="social-icon twitter"><i class="fa fa-twitter"></i></a>
+        <a href="https://www.instagram.com/torque_2k25?igsh=MTdmNjFkZ2l6c2c4aw==" class="social-icon twitter"><i class="fa fa-twitter"></i></a>
         <a href="https://www.instagram.com/torque_2k25?igsh=MTdmNjFkZ2l6c2c4aw==" class="social-icon instagram"><i class="fa fa-instagram"></i></a>
-        <a href="https://youtube.com/@torque_jntuk?si=nWCpxwGJb8z7qSG6" class="social-icon youtube"><i class="fa fa-youtube"></i></a>
+        <a href="https://youtube.com/@torque_jntuk?si=nWCpxwGJb8z7qSG6" class="social-icon youtube"><i class="fa fa-youtube-play"></i></a>
     </div>
 </footer>
     <script>
@@ -571,37 +571,85 @@
                 }
             });
 
-document.addEventListener('DOMContentLoaded', function() {
- 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
+            document.addEventListener('visibilitychange', function() {
+                if (document.hidden) {
+                    window.cancelAnimationFrame(starField._renderFrame);
+                    window.cancelAnimationFrame(starField._watchCanvasSize);
+                } else {
+                    window.requestAnimationFrame(starField._renderFrame.bind(starField));
+                    window.requestAnimationFrame(starField._watchCanvasSize.bind(starField));
+                }
+            });
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
         });
-    }, { threshold: 0.1 });
-
- 
-    document.querySelectorAll('.info-box, .coordinator-box').forEach(el => {
-        el.classList.add('animate-on-scroll');
-        observer.observe(el);
-    });
-
-    const starField = new StarField('background_container');
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    starField.render(isMobile ? 100 : 200, isMobile ? 2 : 3);
-
-    let resizeTimeout;
-    window.addEventListener('resize', () => {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-            if (starField) {
-                starField._adjustCanvasSize();
+         StarField.prototype._updateStarField = function() {
+            // Cache center coordinates for performance
+            const centerX = this.width / 2;
+            const centerY = this.height / 2;
+            
+            for (let i = 0; i < this.numStars; i++) {
+                const star = this.starField[i];
+                
+                const increment = Math.min(star.speed, Math.abs(star.speed / star.slope));
+            
+                star.x += (star.x > 0) ? increment : -increment;
+                star.y = star.slope * star.x;
+                
+                // Improved opacity calculation with maximum limit
+                star.opacity = Math.min(star.opacity + star.speed / 100, 1);
+                
+                // Optimized boundary checking
+                if (Math.abs(star.x) > centerX || Math.abs(star.y) > centerY) {
+                    const randomLoc = BigBang.getRandomPosition(
+                        -this.width / 10,
+                        -this.height / 10,
+                        this.width / 5,
+                        this.height / 5
+                    );
+                    star.resetPosition(randomLoc.x, randomLoc.y, this.maxStarSpeed);
+                }
             }
-        }, 250);
-    });
-});
-                        -
+        };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Intersection Observer for scroll animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            document.querySelectorAll('.info-box, .coordinator-box').forEach(el => {
+                el.classList.add('animate-on-scroll');
+                observer.observe(el);
+            });
+
+            const starField = new StarField('background_container');
+            starField.render(200, 3); // Reduced star count for better performance
+
+            let resizeTimeout;
+            window.addEventListener('resize', () => {
+
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    if (starField) {
+                        starField._adjustCanvasSize();
+                    }
+                }, 250); 
+            });
+        });
     </script>
 </body>
 </html>
