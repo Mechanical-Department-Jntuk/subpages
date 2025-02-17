@@ -9,6 +9,7 @@
     <meta name="author" content="Website Team, torquejntuk">
     <link rel="icon" href="images/torque-logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
         * {
             margin: 0;
@@ -258,6 +259,102 @@
                 gap: 15px;
             }
         }
+           .info-box {
+            position: relative;
+            overflow: hidden; 
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .info-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.3);
+        }
+
+        .info-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.1),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        .info-box:hover::before {
+            left: 100%;
+        }
+
+        .coordinator-box {
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .coordinator-box:hover {
+            transform: scale(1.02);
+        }
+
+        .coordinator-info > div {
+            position: relative;
+            padding: 20px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .coordinator-info > div:hover {
+            background: rgba(0, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .glass-navbar {
+            transition: all 0.3s ease;
+        }
+
+        .glass-navbar:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 480px) {
+            .info-box h2 {
+                font-size: 1.8em;
+            }
+
+            .info-box h3 {
+                font-size: 1.3em;
+            }
+
+            .info-box p {
+                font-size: 1em;
+            }
+
+            .coordinator-info {
+                grid-template-columns: 1fr;
+            }
+        }
+        #background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
     </style>
 </head>
 <body>
@@ -267,7 +364,7 @@
 
     <nav class="glass-navbar">
         <ul>
-            <li><a href="torquejntuk.in">Home</a></li>
+            <li><a href="https://torquejntuk.in">Home</a></li>
         </ul>
     </nav>
 
@@ -315,14 +412,12 @@
 <footer class="footer">
     <p>&copy; 2025 Torque JNTUK. All rights reserved.</p>
     <div class="social-links">
-        <a href="#" class="social-icon facebook"><i class="fa fa-facebook"></i></a>
-        <a href="#" class="social-icon twitter"><i class="fa fa-twitter"></i></a>
-        <a href="#" class="social-icon instagram"><i class="fa fa-instagram"></i></a>
-        <a href="#" class="social-icon linkedin"><i class="fa fa-linkedin"></i></a>
+        <a href="https://x.com/TORQUE_2K25?t=ILgS1XjD_ygM9mzeEA1mbQ&s=08" class="social-icon twitter"><i class="fa fa-twitter"></i></a>
+        <a href="https://www.instagram.com/torque_2k25?igsh=MTdmNjFkZ2l6c2c4aw==" class="social-icon instagram"><i class="fa fa-instagram"></i></a>
+        <a href="https://youtube.com/@torque_jntuk?si=nWCpxwGJb8z7qSG6" class="social-icon youtube"><i class="fa fa-youtube"></i></a>
     </div>
 </footer>
     <script>
-        // Star field animation code (same as before)
         var Star = function(x, y, maxSpeed) {
             this.x = x;
             this.y = y;
@@ -439,7 +534,6 @@
             this._initScene(this.numStars);
         };
 
-        // RequestAnimationFrame polyfill
         (function() {
             var lastTime = 0;
             var vendors = ['ms', 'moz', 'webkit', 'o'];
@@ -468,38 +562,46 @@
             }
         }());
 
-        // Initialize the starfield
         document.addEventListener('DOMContentLoaded', function() {
             var starField = new StarField('background_container').render(333, 5);
 
-            // Handle resize events
             window.addEventListener('resize', function() {
                 if (starField) {
                     starField._adjustCanvasSize();
                 }
             });
 
-            // Handle visibility change to pause/resume animation
-            document.addEventListener('visibilitychange', function() {
-                if (document.hidden) {
-                    window.cancelAnimationFrame(starField._renderFrame);
-                    window.cancelAnimationFrame(starField._watchCanvasSize);
-                } else {
-                    window.requestAnimationFrame(starField._renderFrame.bind(starField));
-                    window.requestAnimationFrame(starField._watchCanvasSize.bind(starField));
-                }
-            });
-
-            // Add smooth scrolling for better mobile experience
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                });
-            });
+document.addEventListener('DOMContentLoaded', function() {
+ 
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
         });
+    }, { threshold: 0.1 });
+
+ 
+    document.querySelectorAll('.info-box, .coordinator-box').forEach(el => {
+        el.classList.add('animate-on-scroll');
+        observer.observe(el);
+    });
+
+    const starField = new StarField('background_container');
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    starField.render(isMobile ? 100 : 200, isMobile ? 2 : 3);
+
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            if (starField) {
+                starField._adjustCanvasSize();
+            }
+        }, 250);
+    });
+});
+                        -
     </script>
 </body>
 </html>
