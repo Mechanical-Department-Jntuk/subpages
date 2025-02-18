@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
- <meta name="viewport" content="width=device-width, initial-scale=0.5">
-    <title>Torque - BRIDGE BUILDING</title>
-    <meta name="keywords" content="torque, torquejntuk, torquejntuk.in, Torque Jntuk">
-    <meta name="description" content="Event website-subpage">
-    <meta name="author" content="Website Team, torquejntuk">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Torque - Bridge Battleground</title>
+    <meta name="keywords" content="torque, torquejntuk, torquejntuk.in, Torque Jntuk, Bridge Battleground">
+    <meta name="description" content="Bridge Battleground - An Ultimate Bridge-Building Challenge by Torque JNTUK">
+    <meta name="author" content="Torque JNTUK">
     <link rel="icon" href="images/torque-logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
         * {
             margin: 0;
@@ -16,31 +17,39 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --primary-color: #00ffff;
+            --primary-hover: rgba(0, 255, 255, 0.3);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-bg-hover: rgba(255, 255, 255, 0.15);
+            --text-color: white;
+            --box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            --box-shadow-hover: 0 10px 30px rgba(0, 255, 255, 0.3);
+        }
+
         body {
             font-family: 'Arial', sans-serif;
             line-height: 1.6;
-            color: white;
+            color: var(--text-color);
             min-height: 100vh;
             overflow-x: hidden;
+            position: relative;
+            padding-bottom: 100px;
+            background-color: #000;
         }
 
         #background_container {
             position: fixed;
-            padding: 0;
-            margin: 0;
-            overflow: hidden;
-            background: #000;
             width: 100%;
             height: 100%;
             top: 0;
             left: 0;
             z-index: -2;
-            user-select: none;
         }
 
         .main-wrapper {
-            min-height: 100vh;
-            padding: 80px 20px 100px;
+            min-height: calc(100vh - 100px);
+            padding: 80px 15px 30px;
             position: relative;
             z-index: 1;
         }
@@ -50,23 +59,53 @@
             margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr;
-            gap: 30px;
-            padding: 20px;
+            gap: 25px;
+            padding: 15px;
         }
 
         @media (min-width: 768px) {
             .content-container {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+                padding: 20px;
             }
         }
 
         .info-box {
-            background: rgba(255, 255, 255, 0.1);
+            background: var(--glass-bg);
             border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            padding: 25px;
+            box-shadow: var(--box-shadow);
             backdrop-filter: blur(10px);
-            animation: slideIn 1s ease-out;
+            animation: slideIn 0.8s ease-out;
+            position: relative;
+            overflow: hidden; 
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .info-box:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow-hover);
+        }
+
+        .info-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.1),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        .info-box:hover::before {
+            left: 100%;
         }
 
         .info-box.full-width {
@@ -74,15 +113,15 @@
         }
 
         .info-box h2 {
-            font-size: 2.5em;
+            font-size: 2.2em;
             margin-bottom: 15px;
-            color: #00ffff;
+            color: var(--primary-color);
         }
 
         .info-box h3 {
-            font-size: 1.8em;
+            font-size: 1.6em;
             margin-bottom: 15px;
-            color: #00ffff;
+            color: var(--primary-color);
         }
 
         .info-box p {
@@ -105,19 +144,25 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            animation: fadeIn 1.5s ease-out;
+            animation: fadeIn 1.2s ease-out;
         }
 
         .coordinator-box {
             background: rgba(255, 255, 255, 0.15);
             border-radius: 20px;
-            padding: 30px;
+            padding: 25px;
             text-align: center;
-            animation: slideIn 1s ease-out;
+            animation: slideIn 0.8s ease-out;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .coordinator-box:hover {
+            transform: scale(1.02);
         }
 
         .coordinator-box h3 {
-            color: #00ffff;
+            color: var(--primary-color);
             margin-bottom: 20px;
         }
 
@@ -125,6 +170,27 @@
             display: grid;
             gap: 20px;
             margin-top: 20px;
+        }
+
+        .coordinator-info > div {
+            position: relative;
+            padding: 20px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .coordinator-info > div:hover {
+            background: rgba(0, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+        
+        .coordinator-info img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
         }
 
         @media (min-width: 768px) {
@@ -140,12 +206,17 @@
             transform: translateX(-50%);
             width: 90%;
             max-width: 400px;
-            background: rgba(255, 255, 255, 0.1);
+            background: var(--glass-bg);
             backdrop-filter: blur(10px);
             z-index: 1000;
             border-radius: 30px;
-            padding: 15px 30px;
+            padding: 12px 25px;
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .glass-navbar:hover {
+            background: var(--glass-bg-hover);
         }
 
         .glass-navbar ul {
@@ -159,7 +230,7 @@
         .glass-navbar a {
             color: white;
             text-decoration: none;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 500;
             transition: all 0.3s ease;
             padding: 8px 20px;
@@ -168,17 +239,19 @@
 
         .glass-navbar a:hover {
             background: rgba(0, 255, 255, 0.2);
-            color: #00ffff;
+            color: var(--primary-color);
         }
 
         .footer {
-            position: fixed;
-            bottom: 0;
             width: 100%;
             background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(10px);
-            padding: 20px 0;
+            padding: 20px 10px;
             text-align: center;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            z-index: 10;
         }
 
         .social-links {
@@ -186,6 +259,7 @@
             justify-content: center;
             gap: 20px;
             margin-top: 15px;
+            flex-wrap: wrap;
         }
 
         .social-icon {
@@ -204,13 +278,12 @@
 
         .social-icon:hover {
             transform: translateY(-3px);
-            background: rgba(0, 255, 255, 0.3);
+            background: var(--primary-hover);
         }
 
-        .facebook:hover { background: #3b5998; }
         .twitter:hover { background: #00acee; }
         .instagram:hover { background: #e4405f; }
-        .linkedin:hover { background: #0e76a8; }
+        .youtube:hover { background: #c4302b; }
 
         @keyframes slideIn {
             from {
@@ -229,8 +302,13 @@
         }
 
         @media (max-width: 768px) {
+            body {
+                padding-bottom: 120px;
+            }
+            
             .main-wrapper {
-                padding: 60px 10px 80px;
+                padding: 70px 10px 30px;
+                min-height: calc(100vh - 120px);
             }
 
             .content-container {
@@ -243,11 +321,15 @@
             }
 
             .info-box h2 {
-                font-size: 2em;
+                font-size: 1.8em;
             }
 
             .info-box h3 {
-                font-size: 1.5em;
+                font-size: 1.4em;
+            }
+
+            .info-box p {
+                font-size: 1em;
             }
 
             .coordinator-box {
@@ -257,6 +339,69 @@
             .social-links {
                 gap: 15px;
             }
+            
+            .social-icon {
+                width: 35px;
+                height: 35px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding-bottom: 130px;
+            }
+            
+            .main-wrapper {
+                min-height: calc(100vh - 130px);
+                padding: 60px 10px 20px;
+            }
+            
+            .info-box {
+                padding: 15px;
+            }
+            
+            .info-box h2 {
+                font-size: 1.6em;
+            }
+
+            .info-box h3 {
+                font-size: 1.2em;
+            }
+
+            .info-box p {
+                font-size: 0.95em;
+            }
+
+            .coordinator-info {
+                grid-template-columns: 1fr;
+            }
+
+            .coordinator-info img {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .footer {
+                padding: 15px 5px;
+            }
+            
+            .social-links {
+                gap: 10px;
+            }
+            
+            .social-icon {
+                width: 32px;
+                height: 32px;
+                padding: 8px;
+            }
+        }
+
+        #background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
         }
     </style>
 </head>
@@ -267,71 +412,69 @@
 
     <nav class="glass-navbar">
         <ul>
-            <li><a href="torquejntuk.in">Home</a></li>
+            <li><a href="https://torquejntuk.in">Home</a></li>
         </ul>
     </nav>
-<div class="main-wrapper">
-    <div class="content-container">
-        <div class="info-box full-width">
-            <h2>Bridge Battleground</h2>
-            <p>An Ultimate Bridge-Building Challenge – Where Engineering Meets Innovation!</p>
-        </div>
 
-        <div class="image-container">
-            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjq1lUY8MNFwo78j3BaL6qy_XDv7db6kIKt4d5arRVf6OamxHxZ00024Adz9KLqjcGpNARhnlH-vOb36KFV7V6j8wmCVmQEoQ4waFpLUOM_w4XaeyvJsqIzYolcZDgnmgJs2Xv5EUykBXs/s1600/DSC05299.JPG" alt="Bridge Battleground Image">
-        </div>
+    <div class="main-wrapper">
+        <div class="content-container">
+            <div class="info-box full-width">
+                <h2>Bridge Battleground</h2>
+                <p>An Ultimate Bridge-Building Challenge – Where Engineering Meets Innovation!</p>
+            </div>
 
-        <div class="info-box full-width">
-            <h3>Welcome to Bridge Battleground</h3>
-            <p>Are you ready to put your engineering skills to the test and build a structure that stands strong against the forces of nature? Bridge Battleground is an exciting challenge where participants must design and construct a sturdy bridge using limited materials while demonstrating their knowledge of structural mechanics and load distribution. This event is a mix of creativity, technical expertise, and hands-on problem-solving.</p>
-        </div>
+            <div class="image-container">
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjq1lUY8MNFwo78j3BaL6qy_XDv7db6kIKt4d5arRVf6OamxHxZ00024Adz9KLqjcGpNARhnlH-vOb36KFV7V6j8wmCVmQEoQ4waFpLUOM_w4XaeyvJsqIzYolcZDgnmgJs2Xv5EUykBXs/s1600/DSC05299.JPG" alt="Bridge Battleground Competition">
+            </div>
 
-        <div class="info-box">
-            <h3>Event Highlights</h3>
-            <p><strong>Materials Provided:</strong> Participants will be given a set of materials (e.g., popsicle sticks, straws, glue, threads) and must construct a strong and stable bridge within the given time.</p>
-            <p><strong>Time Limit:</strong> Participants will have 2 hours to complete their bridge.</p>
-            <p><strong>Testing Criteria:</strong> The bridge will be tested for strength, load-bearing capacity, and efficiency.</p>
-            <p><strong>Prizes:</strong> Exciting prizes await those who can combine smart engineering with innovative thinking.</p>
-        </div>
+            <div class="info-box full-width">
+                <h3>Welcome to Bridge Battleground</h3>
+                <p>Are you ready to put your engineering skills to the test and build a structure that stands strong against the forces of nature? Bridge Battleground is an exciting challenge where participants must design and construct a sturdy bridge using limited materials while demonstrating their knowledge of structural mechanics and load distribution. This event combines creativity, technical expertise, and hands-on problem-solving.</p>
+            </div>
 
-        <div class="info-box">
-            <h3>Judging Criteria</h3>
-            <p><strong>Strength:</strong> The bridge must withstand the maximum load without collapsing.</p>
-            <p><strong>Efficiency:</strong> The bridge should use materials optimally with minimal waste.</p>
-            <p><strong>Design:</strong> Creativity and innovation in the bridge's design will be evaluated.</p>
-            <p><strong>Adherence to Rules:</strong> Compliance with the provided guidelines and time limit.</p>
-        </div>
+            <div class="info-box">
+                <h3>Event Highlights</h3>
+                <p><strong>Materials Provided:</strong> Participants will be given a set of materials (e.g., popsicle sticks, straws, glue, threads) and must construct a strong and stable bridge within the given time.</p>
+                <p><strong>Time Limit:</strong> Participants will have 2 hours to complete their bridge.</p>
+                <p><strong>Testing Criteria:</strong> The bridge will be tested for strength, load-bearing capacity, and efficiency.</p>
+                <p><strong>Prizes:</strong> Exciting prizes await those who can combine smart engineering with innovative thinking.</p>
+            </div>
 
-        <div class="coordinator-box">
-            <h3>Coordinators</h3>
-            <div class="coordinator-info">
-                <div>
-                      <img src="images/ram.jpg" alt="sri ram" style="width:100px; height:100px; border-radius:50%; object-fit:cover;">
-                    <p><strong>D. Sri Ram</strong></p>
-                    <p>Phone: +91 9701244959 </p>
-                </div>
-                <div>
-                      <img src="images/gayatri.jpeg" alt="gayatri" style="width:100px; height:100px; border-radius:50%; object-fit:cover;">
-                    <p><strong>K. Gayatri</strong></p>
-                    
-                 
+            <div class="info-box">
+                <h3>Judging Criteria</h3>
+                <p><strong>Strength:</strong> The bridge must withstand the maximum load without collapsing.</p>
+                <p><strong>Efficiency:</strong> The bridge should use materials optimally with minimal waste.</p>
+                <p><strong>Design:</strong> Creativity and innovation in the bridge's design will be evaluated.</p>
+                <p><strong>Adherence to Rules:</strong> Compliance with the provided guidelines and time limit.</p>
+            </div>
 
+            <div class="coordinator-box">
+                <h3>Coordinators</h3>
+                <div class="coordinator-info">
+                    <div>
+                        <img src="images/ram.jpg" alt="Sri Ram">
+                        <p><strong>D. Sri Ram</strong></p>
+                        <p>Phone: +91 9701244959</p>
+                    </div>
+                    <div>
+                        <img src="images/gayatri.jpeg" alt="Gayatri">
+                        <p><strong>K. Gayatri</strong></p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<footer class="footer">
-    <p>&copy; 2025 Torque JNTUK. All rights reserved.</p>
-    <div class="social-links">
-        <a href="#" class="social-icon facebook"><i class="fa fa-facebook"></i></a>
-        <a href="#" class="social-icon twitter"><i class="fa fa-twitter"></i></a>
-        <a href="#" class="social-icon instagram"><i class="fa fa-instagram"></i></a>
-        <a href="#" class="social-icon linkedin"><i class="fa fa-linkedin"></i></a>
-    </div>
-</footer>
+
+    <footer class="footer">
+        <p>&copy; 2025 Torque JNTUK. All rights reserved.</p>
+        <div class="social-links">
+            <a href="https://www.instagram.com/torque_2k25?igsh=MTdmNjFkZ2l6c2c4aw==" class="social-icon twitter"><i class="fa fa-twitter"></i></a>
+            <a href="https://www.instagram.com/torque_2k25?igsh=MTdmNjFkZ2l6c2c4aw==" class="social-icon instagram"><i class="fa fa-instagram"></i></a>
+            <a href="https://youtube.com/@torque_jntuk?si=nWCpxwGJb8z7qSG6" class="social-icon youtube"><i class="fa fa-youtube-play"></i></a>
+        </div>
+    </footer>
+
     <script>
-        // Star field animation code (same as before)
         var Star = function(x, y, maxSpeed) {
             this.x = x;
             this.y = y;
@@ -373,15 +516,26 @@
         };
 
         StarField.prototype._updateStarField = function() {
-            var i, star, randomLoc, increment;
-            for (i = 0; i < this.numStars; i++) {
-                star = this.starField[i];
-                increment = Math.min(star.speed, Math.abs(star.speed / star.slope));
+            const centerX = this.width / 2;
+            const centerY = this.height / 2;
+            
+            for (let i = 0; i < this.numStars; i++) {
+                const star = this.starField[i];
+                
+                const increment = Math.min(star.speed, Math.abs(star.speed / star.slope));
+            
                 star.x += (star.x > 0) ? increment : -increment;
                 star.y = star.slope * star.x;
-                star.opacity += star.speed / 100;
-                if ((Math.abs(star.x) > this.width / 2) || (Math.abs(star.y) > this.height / 2)) {
-                    randomLoc = BigBang.getRandomPosition(-this.width / 10, -this.height / 10, this.width / 5, this.height / 5);
+                
+                star.opacity = Math.min(star.opacity + star.speed / 100, 1);
+                
+                if (Math.abs(star.x) > centerX || Math.abs(star.y) > centerY) {
+                    const randomLoc = BigBang.getRandomPosition(
+                        -this.width / 10,
+                        -this.height / 10,
+                        this.width / 5,
+                        this.height / 5
+                    );
                     star.resetPosition(randomLoc.x, randomLoc.y, this.maxStarSpeed);
                 }
             }
@@ -427,7 +581,8 @@
             }
         };
 
-        StarField.prototype._initScene = function(numStars) {for (var i = 0; i < this.numStars; i++) {
+        StarField.prototype._initScene = function(numStars) {
+            for (var i = 0; i < this.numStars; i++) {
                 this.starField.push(
                     BigBang.getRandomStar(
                         -this.width / 2,
@@ -477,37 +632,61 @@
             }
         }());
 
-        // Initialize the starfield
         document.addEventListener('DOMContentLoaded', function() {
-            var starField = new StarField('background_container').render(333, 5);
+            // Initialize star background with fewer stars for better performance
+            const starField = new StarField('background_container');
+            const isMobile = window.innerWidth < 768;
+            starField.render(isMobile ? 80 : 150, 3);
 
-            // Handle resize events
-            window.addEventListener('resize', function() {
-                if (starField) {
-                    starField._adjustCanvasSize();
-                }
-            });
-
-            // Handle visibility change to pause/resume animation
-            document.addEventListener('visibilitychange', function() {
-                if (document.hidden) {
-                    window.cancelAnimationFrame(starField._renderFrame);
-                    window.cancelAnimationFrame(starField._watchCanvasSize);
-                } else {
-                    window.requestAnimationFrame(starField._renderFrame.bind(starField));
-                    window.requestAnimationFrame(starField._watchCanvasSize.bind(starField));
-                }
-            });
-
-            // Add smooth scrolling for better mobile experience
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
+            // Lazy loading for elements
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            observer.unobserve(entry.target);
+                        }
                     });
+                }, {
+                    threshold: 0.1,
+                    rootMargin: '50px'
                 });
+
+                document.querySelectorAll('.info-box, .coordinator-box').forEach(el => {
+                    observer.observe(el);
+                });
+            } else {
+                // Fallback for browsers that don't support IntersectionObserver
+                document.querySelectorAll('.info-box, .coordinator-box').forEach(el => {
+                    el.classList.add('visible');
+                });
+            }
+
+            // Efficient resize handler
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    starField._adjustCanvasSize();
+                }, 250);
             });
+
+            // Performance optimization for background animation
+            let isTabActive = true;
+            document.addEventListener('visibilitychange', () => {
+                isTabActive = !document.hidden;
+            });
+
+            // Only animate when the tab is active
+            if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+                // Check if user prefers reduced motion
+                setInterval(() => {
+                    if (isTabActive) {
+                        starField._updateStarField();
+                        starField._renderStarField();
+                    }
+                }, 33);
+            }
         });
     </script>
 </body>
