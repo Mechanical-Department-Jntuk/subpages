@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -419,6 +418,106 @@
             width: 100%;
             height: 100%;
         }
+
+        /* Registration Button Styles */
+        .register-btn-container {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .register-btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #00ffff 0%, #0088ff 100%);
+            color: #000;
+            font-size: 1.2em;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(0, 255, 255, 0.4);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .register-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 255, 255, 0.6);
+            color: #fff;
+            background: linear-gradient(135deg, #0088ff 0%, #00ffff 100%);
+        }
+
+        .register-btn:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        .register-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: 0.5s;
+        }
+
+        .register-btn:hover::before {
+            left: 100%;
+        }
+
+        /* Tournament details table */
+        .tournament-details {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+
+        .tournament-details tr {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .tournament-details tr:last-child {
+            border-bottom: none;
+        }
+
+        .tournament-details td {
+            padding: 10px 5px;
+        }
+
+        .tournament-details td:first-child {
+            font-weight: bold;
+            color: #00ffff;
+            width: 40%;
+        }
+
+        /* Rules list */
+        .rules-list {
+            list-style-type: disc;
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .rules-list li {
+            margin-bottom: 8px;
+        }
+
+        /* How to participate steps */
+        .steps-list {
+            list-style-type: decimal;
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .steps-list li {
+            margin-bottom: 8px;
+        }
     </style>
 </head>
 <body>
@@ -436,7 +535,7 @@
     <div class="content-container">
         <div class="info-box full-width">
             <h2>Chess Monarch</h2>
-            <p>Where Strategy Meets Supremacy</p>
+            <p>Conquer the Game, Claim the Crown</p>
         </div>
 
         <div class="image-container">
@@ -448,11 +547,53 @@
             <p>"Welcome to Chess Monarch: A Celebration of Intellectual Prowess, Strategic Brilliance, and Mind-Sport Excellence!" Join us on a journey to unleash the power of chess and crown the ultimate champion. This event is the ultimate platform for chess enthusiasts to showcase their skills, strategies, and mental agility in a battle of wits that will leave only one victorious.</p>
         </div>
 
+        <div class="register-btn-container">
+            <a href="#" class="register-btn">Register Now</a>
+        </div>
+
         <div class="info-box">
-            <h3>Event Format</h3>
-            <p><strong>Online Chess Tournament:</strong> Players will compete in a Swiss-style tournament, with 7 rounds of intense competition, on the Lichess platform.</p>
-            <p><strong>Time Control:</strong> Each player will have 15 minutes with NO increment to make their moves, requiring a perfect blend of strategy, tactics, and time management.</p>
-            <p><strong>Judging and Evaluation:</strong> Players will be ranked based on their performance, with the top-ranked player being crowned the Chess Monarch.</p>
+            <h3>Tournament Details</h3>
+            <table class="tournament-details">
+                <tr>
+                    <td>Mode:</td>
+                    <td>Online</td>
+                </tr>
+                <tr>
+                    <td>Platform:</td>
+                    <td>Lichess</td>
+                </tr>
+                <tr>
+                    <td>Format:</td>
+                    <td>Swiss tournament</td>
+                </tr>
+                <tr>
+                    <td>Rounds:</td>
+                    <td>Seven rounds</td>
+                </tr>
+                <tr>
+                    <td>Time Control:</td>
+                    <td>15 minutes (No increment)</td>
+                </tr>
+                <tr>
+                    <td>Date:</td>
+                    <td>14-05-2025</td>
+                </tr>
+                <tr>
+                    <td>Entry Fee:</td>
+                    <td>Rs 100/-</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="info-box">
+            <h3>Rules and Regulations</h3>
+            <ul class="rules-list">
+                <li>All participants must have a Lichess account and be familiar with the platform's rules and regulations.</li>
+                <li>The tournament will be played with a standard chess clock, with no time increment per move.</li>
+                <li>Players are expected to be online and ready to play at the scheduled start time for each round.</li>
+                <li>Any player who is not online and ready to play within 10 minutes of the scheduled start time will be forfeited.</li>
+                <li>The tournament director's decisions are final and binding.</li>
+            </ul>
         </div>
 
         <div class="info-box">
@@ -462,18 +603,26 @@
             <p><strong>All Participants:</strong> All participants will receive a certificate of participation and a chance to improve their chess skills.</p>
         </div>
 
+        <div class="info-box">
+            <h3>How to Participate</h3>
+            <ol class="steps-list">
+                <li>Create a Lichess account if you don't already have one.</li>
+                <li>Register for the tournament by clicking on the "Register Now" button above or scanning the QR code on the official Torque poster.</li>
+                <li>Pay the entry fee of Rs 100/- through the provided payment methods.</li>
+                <li>Make sure to be online and ready to play at the scheduled start time for each round.</li>
+            </ol>
+        </div>
+
         <div class="coordinator-box">
             <h3>Coordinators</h3>
             <div class="coordinator-info">
                 <div>
-                     <img src="images/vlsv.png" alt="vlsv" style="width:100px; height:100px; border-radius:50%; object-fit:cover;">
+                    <img src="images/vlsv.png" alt="vlsv" style="width:100px; height:100px; border-radius:50%; object-fit:cover;">
                     <p><strong>V.L.S.V. Srinivas</strong></p>
                     <p>Phone: +91 9010451634</p>
                 </div>
                 <div>
-                   
-                 <!--   <p><strong>M. Aditya Sudha</strong></p> -->
-                    
+                   <!-- Placeholder for second coordinator -->
                 </div>
             </div>
         </div>
