@@ -1,1 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Torque - Bridge Battleground</title>
+    <meta name="keywords" content="torque, torquejntuk, torquejntuk.in, Torque Jntuk, Bridge Battleground">
+    <meta name="description" content="Bridge Battleground - An Ultimate Bridge-Building Challenge by Torque JNTUK">
+    <meta name="author" content="Torque JNTUK">
+    <link rel="icon" href="images/torque-logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        :root {
+            --primary-color: #00ffff;
+            --primary-hover: rgba(0, 255, 255, 0.3);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-bg-hover: rgba(255, 255, 255, 0.15);
+            --text-color: white;
+            --box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            --box-shadow-hover: 0 10px 30px rgba(0, 255, 255, 0.3);
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            padding-bottom: 100px;
+            background-color: #000;
+        }
+
+        #background_container {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -2;
+        }
+
+        .main-wrapper {
+            min-height: calc(100vh - 100px);
+            padding: 80px 15px 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+            padding: 15px;
+        }
+
+        @media (min-width: 768px) {
+            .content-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+                padding: 20px;
+            }
+        }
+
+        .info-box {
+            background: var(--glass-bg);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: var(--box-shadow);
+            backdrop-filter: blur(10px);
+            animation: slideIn 0.8s ease-out;
+            position: relative;
+            overflow: hidden; 
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .info-box:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow-hover);
+        }
+
+        .info-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.1),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        .info-box:hover::before {
+            left: 100%;
+        }
+
+        .info-box.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .info-box h2 {
+            font-size: 2.2em;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .info-box h3 {
+            font-size: 1.6em;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .info-box p {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .image-container {
+            grid-column: 1 / -1;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            animation: fadeIn 1.2s ease-out;
+        }
+
+        .coordinator-box {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+            animation: slideIn 0.8s ease-out;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .coordinator-box:hover {
+            transform: scale(1.02);
+        }
+
+        .coordinator-box h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .coordinator-info {
+            display: grid;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .coordinator-info > div {
+            position: relative;
+            padding: 20px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .coordinator-info > div:hover {
+            background: rgba(0, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+        
+        .coordinator-info img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+
+        @media (min-width: 768px) {
+            .coordinator-info {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .glass-navbar {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 400px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-radius: 30px;
+            padding: 12px 25px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .glass-navbar:hover {
+            background: var(--glass-bg-hover);
+        }
+
+        .glass-navbar ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .glass-navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 20px;
+            border-radius: 15px;
+        }
+
+        .glass-navbar a:hover {
+            background: rgba(0, 255, 255, 0.2);
+            color: var(--primary-color);
+        }
+
+        .footer {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 20px 10px;
+            text-align: center;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            z-index: 10;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .social-icon {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px);
+            background: var(--primary-hover);
+        }
+
+        .twitter:hover { background: #00acee; }
+        .instagram:hover { background: #e4405f; }
+        .youtube:hover { background: #c4302b; }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-bottom: 120px;
+            }
+            
+            .main-wrapper {
+                padding: 70px 10px 30px;
+                min-height: calc(100vh - 120px);
+            }
+
+            .content-container {
+                padding: 10px;
+                gap: 20px;
+            }
+
+            .info-box {
+                padding: 20px;
+            }
+
+            .info-box h2 {
+                font-size: 1.8em;
+            }
+
+            .info-box h3 {
+                font-size: 1.4em;
+            }
+
+            .info-box p {
+                font-size: 1em;
+            }
+
+            .coordinator-box {
+                padding: 20px;
+            }
+
+            .social-links {
+                gap: 15px;
+            }
+            
+            .social-icon {
+                width: 35px;
+                height: 35px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding-bottom: 130px;
+            }
+            
+            .main-wrapper {
+                min-height: calc(100vh - 130px);
+                padding: 60px 10px 20px;
+            }
+            
+            .info-box {
+                padding: 15px;
+            }
+            
+            .info-box h2 {
+                font-size: 1.6em;
+            }
+
+            .info-box h3 {
+                font-size: 1.2em;
+            }
+
+            .info-box p {
+                font-size: 0.95em;
+            }
+
+            .coordinator-info {
+                grid-template-columns: 1fr;
+            }
+
+            .coordinator-info img {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .footer {
+                padding: 15px 5px;
+            }
+            
+            .social-links {
+                gap: 10px;
+            }
+            
+            .social-icon {
+                width: 32px;
+                height: 32px;
+                padding: 8px;
+            }
+        }
+
+        #background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="background_container">
+        <canvas id="background"></canvas>
+    </div>
+
+    <nav class="glass-navbar">
+        <ul>
+            <li><a href="https://torquejntuk.in">Home</a></li>
+        </ul>
+    </nav>
+
+    <div class="main-wrapper">
+        <div class="content-container">
+            <div class="info-box full-width">
+                <h2>Torque - Rhythmic Fusion</h2>
+                <p>Rhythmic Fusion - A Spectacle of Dance and Energy by Torque JNTUK</p>
+            </div>
+
+            <div class="image-container">
+                <img src="https://i.pinimg.com/550x/09/6c/8b/096c8b6c62f3134faf432f2f14eb10ab.jpg">
+            </div>
+
+<!-- Then in the body, replace the content boxes -->
+<div class="info-box full-width">
+    <h2></h2>
+    <p>A Spectacle of Dance and Energy!</p>
+</div>
+
+<div class="info-box full-width">
+    <h3>Event Overview</h3>
+    <p>Get ready to witness an electrifying display of rhythm, grace, and energy! Rhythmic Fusion is a cultural dance performance presented as part of Torque, adding a vibrant touch to the technical fest. This non-competitive event is all about celebrating the passion for dance, bringing together performers to showcase their talent, coordination, and creativity on stage.</p>
+</div>
+
+<div class="info-box">
+    <h3>Event Highlights</h3>
+    <p><strong>Engaging Performances:</strong> Talented students adding a cultural spark to the fest.</p>
+    <p><strong>Perfect Blend:</strong> A mix of music, movement, and expression to entertain and energize the audience.</p>
+    <p><strong>Creative Platform:</strong> A chance for performers to exhibit their creativity and stage presence in front of peers and faculty.</p>
+</div>
+
+<div class="info-box">
+    <h3>Why Attend?</h3>
+    <p>This event is a celebration of art and expression, giving participants an opportunity to embrace the joy of dancing without the pressure of competition. It's a moment to unite through rhythm, captivate the audience, and make unforgettable memories at Torque.</p>
+    <p>So, let the beats drop, the moves flow, and the stage come alive with Rhythmic Fusion! 🎶💃🔥</p>
+</div>
+    <footer class="footer">
+        <p>&copy; 2025 Torque JNTUK. All rights reserved.</p>
+        <div class="social-links">
+            <a href="https://www.instagram.com/torque_2k25?igsh=MTdmNjFkZ2l6c2c4aw==" class="social-icon twitter"><i class="fa fa-twitter"></i></a>
+            <a href="https://www.instagram.com/torque_2k25?igsh=MTdmNjFkZ2l6c2c4aw==" class="social-icon instagram"><i class="fa fa-instagram"></i></a>
+            <a href="https://youtube.com/@torque_jntuk?si=nWCpxwGJb8z7qSG6" class="social-icon youtube"><i class="fa fa-youtube-play"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        var Star = function(x, y, maxSpeed) {
+            this.x = x;
+            this.y = y;
+            this.slope = y / x;
+            this.opacity = 0;
+            this.speed = Math.max(Math.random() * maxSpeed, 1);
+        };
+
+        Star.prototype.distanceTo = function(originX, originY) {
+            return Math.sqrt(Math.pow(originX - this.x, 2) + Math.pow(originY - this.y, 2));
+        };
+
+        Star.prototype.resetPosition = function(x, y, maxSpeed) {
+            Star.apply(this, arguments);
+            return this;
+        };
+
+        var BigBang = {
+            getRandomStar: function(minX, minY, maxX, maxY, maxSpeed) {
+                var coords = BigBang.getRandomPosition(minX, minY, maxX, maxY);
+                return new Star(coords.x, coords.y, maxSpeed);
+            },
+
+            getRandomPosition: function(minX, minY, maxX, maxY) {
+                return {
+                    x: Math.floor((Math.random() * maxX) + minX),
+                    y: Math.floor((Math.random() * maxY) + minY)
+                };
+            }
+        };
+
+        var StarField = function(containerId) {
+            this.container = document.getElementById(containerId);
+            this.canvasElem = this.container.getElementsByTagName('canvas')[0];
+            this.canvas = this.canvasElem.getContext('2d');
+            this.width = this.container.offsetWidth;
+            this.height = this.container.offsetHeight;
+            this.starField = [];
+        };
+
+        StarField.prototype._updateStarField = function() {
+            const centerX = this.width / 2;
+            const centerY = this.height / 2;
+            
+            for (let i = 0; i < this.numStars; i++) {
+                const star = this.starField[i];
+                
+                const increment = Math.min(star.speed, Math.abs(star.speed / star.slope));
+            
+                star.x += (star.x > 0) ? increment : -increment;
+                star.y = star.slope * star.x;
+                
+                star.opacity = Math.min(star.opacity + star.speed / 100, 1);
+                
+                if (Math.abs(star.x) > centerX || Math.abs(star.y) > centerY) {
+                    const randomLoc = BigBang.getRandomPosition(
+                        -this.width / 10,
+                        -this.height / 10,
+                        this.width / 5,
+                        this.height / 5
+                    );
+                    star.resetPosition(randomLoc.x, randomLoc.y, this.maxStarSpeed);
+                }
+            }
+        };
+
+        StarField.prototype._renderStarField = function() {
+            this.canvas.fillStyle = "rgba(0, 0, 0, .5)";
+            this.canvas.fillRect(0, 0, this.width, this.height);
+            for (var i = 0; i < this.numStars; i++) {
+                var star = this.starField[i];
+                this.canvas.fillStyle = "rgba(255, 255, 255, " + star.opacity + ")";
+                this.canvas.fillRect(star.x + this.width / 2, star.y + this.height / 2, 2, 2);
+            }
+        };
+
+        StarField.prototype._renderFrame = function(elapsedTime) {
+            var timeSinceLastFrame = elapsedTime - (this.prevFrameTime || 0);
+            window.requestAnimationFrame(this._renderFrame.bind(this));
+            if (timeSinceLastFrame >= 30 || !this.prevFrameTime) {
+                this.prevFrameTime = elapsedTime;
+                this._updateStarField();
+                this._renderStarField();
+            }
+        };
+
+        StarField.prototype._adjustCanvasSize = function(width, height) {
+            this.width = this.canvasElem.width = width || this.container.offsetWidth;
+            this.height = this.canvasElem.height = height || this.container.offsetHeight;
+        };
+
+        StarField.prototype._watchCanvasSize = function(elapsedTime) {
+            var timeSinceLastCheck = elapsedTime - (this.prevCheckTime || 0);
+            window.requestAnimationFrame(this._watchCanvasSize.bind(this));
+            if (timeSinceLastCheck >= 333 || !this.prevCheckTime) {
+                this.prevCheckTime = elapsedTime;
+                var width = this.container.offsetWidth;
+                var height = this.container.offsetHeight;
+                if (this.oldWidth !== width || this.oldHeight !== height) {
+                    this.oldWidth = width;
+                    this.oldHeight = height;
+                    this._adjustCanvasSize(width, height);
+                }
+            }
+        };
+
+        StarField.prototype._initScene = function(numStars) {
+            for (var i = 0; i < this.numStars; i++) {
+                this.starField.push(
+                    BigBang.getRandomStar(
+                        -this.width / 2,
+                        -this.height / 2,
+                        this.width,
+                        this.height,
+                        this.maxStarSpeed
+                    )
+                );
+            }
+            window.requestAnimationFrame(this._renderFrame.bind(this));
+            window.requestAnimationFrame(this._watchCanvasSize.bind(this));
+        };
+
+        StarField.prototype.render = function(numStars, maxStarSpeed) {
+            this.numStars = numStars || 100;
+            this.maxStarSpeed = maxStarSpeed || 3;
+            this._initScene(this.numStars);
+        };
+
+        // RequestAnimationFrame polyfill
+        (function() {
+            var lastTime = 0;
+            var vendors = ['ms', 'moz', 'webkit', 'o'];
+            for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+                window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
+                window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame'] || 
+                                           window[vendors[x]+'CancelRequestAnimationFrame'];
+            }
+
+            if (!window.requestAnimationFrame) {
+                window.requestAnimationFrame = function(callback, element) {
+                    var currTime = new Date().getTime();
+                    var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+                    var id = window.setTimeout(function() { 
+                        callback(currTime + timeToCall); 
+                    }, timeToCall);
+                    lastTime = currTime + timeToCall;
+                    return id;
+                };
+            }
+
+            if (!window.cancelAnimationFrame) {
+                window.cancelAnimationFrame = function(id) {
+                    clearTimeout(id);
+                };
+            }
+        }());
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize star background with fewer stars for better performance
+            const starField = new StarField('background_container');
+            const isMobile = window.innerWidth < 768;
+            starField.render(isMobile ? 80 : 150, 3);
+
+            // Lazy loading for elements
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    threshold: 0.1,
+                    rootMargin: '50px'
+                });
+
+                document.querySelectorAll('.info-box, .coordinator-box').forEach(el => {
+                    observer.observe(el);
+                });
+            } else {
+                // Fallback for browsers that don't support IntersectionObserver
+                document.querySelectorAll('.info-box, .coordinator-box').forEach(el => {
+                    el.classList.add('visible');
+                });
+            }
+
+            // Efficient resize handler
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    starField._adjustCanvasSize();
+                }, 250);
+            });
+
+            // Performance optimization for background animation
+            let isTabActive = true;
+            document.addEventListener('visibilitychange', () => {
+                isTabActive = !document.hidden;
+            });
+
+            // Only animate when the tab is active
+            if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+                // Check if user prefers reduced motion
+                setInterval(() => {
+                    if (isTabActive) {
+                        starField._updateStarField();
+                        starField._renderStarField();
+                    }
+                }, 33);
+            }
+        });
+    </script>
+</body>
+</html>
